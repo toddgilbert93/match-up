@@ -39,7 +39,7 @@ export default async function HomePage() {
         <h2 className="text-lg font-semibold mb-2">Rules</h2>
         <p className="text-muted-foreground text-sm">
           Add yourself and submit your match scores. Try to play 
-          everyone before challenging someone to a rematch. 
+          everyone before challenging someone to a rematch. Rankings are determined by number of wins not win percentage to encourage more matches. And remember, have fun
         </p>
       </section>
 

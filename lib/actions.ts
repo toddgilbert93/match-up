@@ -177,8 +177,11 @@ export async function getLadder(): Promise<LadderEntry[]> {
     }
   );
 
-  // Sort by win percentage descending, then by total matches descending
+  // Sort by wins descending, then win percentage descending, then total matches descending
   ladder.sort((a, b) => {
+    if (b.wins !== a.wins) {
+      return b.wins - a.wins;
+    }
     if (b.winPercentage !== a.winPercentage) {
       return b.winPercentage - a.winPercentage;
     }
