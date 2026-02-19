@@ -1,5 +1,6 @@
 import { getPlayerWithMatches, getLadder } from "@/lib/actions";
 import { MatchTable } from "@/components/match-table";
+import { DeletePlayerButton } from "@/components/delete-player-button";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -71,6 +72,13 @@ export default async function PlayerDetailPage({
           <MatchTable matches={playerData.matches} currentPlayerId={playerId} />
         </CardContent>
       </Card>
+
+      <div className="flex justify-end">
+        <DeletePlayerButton
+          playerId={playerData.id}
+          playerName={playerData.name}
+        />
+      </div>
     </div>
   );
 }

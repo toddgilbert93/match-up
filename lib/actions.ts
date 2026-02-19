@@ -22,6 +22,30 @@ export async function getPlayers() {
   return await db.select().from(players).orderBy(players.name);
 }
 
+export async function deletePlayer(id: number) {
+  try {
+    const [player] = await db
+      .select()
+      .from(players)
+      .where(eq(players.id, id))
+      .limit(1);
+
+    if (!player) {
+      return { success: false, error: "Player not found" };
+    }
+
+    await db
+      .delete(matches)
+      .where(or(eq(matches.player1Id, id), eq(matches.player2Id, id)));
+    await db.delete(players).where(eq(players.id, id));
+
+    revalidatePath("/");
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: "Failed to delete player" };
+  }
+}
+
 export async function getPlayerWithMatches(id: number) {
   const [player] = await db
     .select()
