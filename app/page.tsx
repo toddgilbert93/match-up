@@ -35,6 +35,14 @@ export default async function HomePage() {
         </div>
       </div>
 
+      <section className="rounded-lg border bg-muted/40 p-4">
+        <h2 className="text-lg font-semibold mb-2">Rules</h2>
+        <p className="text-muted-foreground text-sm">
+          Add yourself and submit your match scores. Try to play 
+          everyone before challenging someone to a rematch. 
+        </p>
+      </section>
+
       {ladder.length === 0 ? (
         <div className="text-center py-12 text-muted-foreground">
           <p className="text-lg mb-2">No players yet</p>
