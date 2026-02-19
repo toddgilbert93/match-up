@@ -11,7 +11,7 @@ export async function createPlayer(name: string) {
     revalidatePath("/");
     return { success: true, player: result[0] };
   } catch (error: any) {
-    if (error.message?.includes("UNIQUE constraint")) {
+    if (error.message?.includes("unique constraint") || error.message?.includes("duplicate key")) {
       return { success: false, error: "Player name already exists" };
     }
     return { success: false, error: "Failed to create player" };

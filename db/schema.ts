@@ -1,16 +1,13 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
-import { sql } from "drizzle-orm";
+import { pgTable, text, integer, serial, timestamp } from "drizzle-orm/pg-core";
 
-export const players = sqliteTable("players", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const players = pgTable("players", {
+  id: serial("id").primaryKey(),
   name: text("name").notNull().unique(),
-  createdAt: integer("created_at", { mode: "timestamp" })
-    .notNull()
-    .$defaultFn(() => new Date()),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export const matches = sqliteTable("matches", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const matches = pgTable("matches", {
+  id: serial("id").primaryKey(),
   player1Id: integer("player1_id")
     .notNull()
     .references(() => players.id),
@@ -26,9 +23,7 @@ export const matches = sqliteTable("matches", {
   winnerId: integer("winner_id")
     .notNull()
     .references(() => players.id),
-  createdAt: integer("created_at", { mode: "timestamp" })
-    .notNull()
-    .$defaultFn(() => new Date()),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
 export type Player = typeof players.$inferSelect;

@@ -1,6 +1,8 @@
 import { getPlayers } from "@/lib/actions";
 import { MatchForm } from "@/components/match-form";
 
+export const dynamic = "force-dynamic";
+
 export default async function NewMatchPage() {
   const players = await getPlayers();
 
