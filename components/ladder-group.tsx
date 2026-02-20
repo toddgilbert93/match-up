@@ -3,16 +3,17 @@ import Link from "next/link";
 import type { LadderEntry } from "@/lib/actions";
 
 interface LadderGroupProps {
-  record: string;
+  record: string; // kept for backwards compatibility with callers
   entries: LadderEntry[];
 }
 
-export function LadderGroup({ record, entries }: LadderGroupProps) {
+export function LadderGroup({ entries }: LadderGroupProps) {
+  const wins = entries[0].wins;
   return (
     <Card>
       <CardHeader>
         <CardTitle className="text-lg">
-          {record} ({entries[0].winPercentage.toFixed(3)})
+          {wins} win{wins !== 1 ? "s" : ""}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -24,7 +25,9 @@ export function LadderGroup({ record, entries }: LadderGroupProps) {
               className="block p-2 rounded hover:bg-accent transition-colors"
             >
               <div className="flex justify-between items-center">
-                <span className="font-medium">{entry.player.name}</span>
+                <span className="font-medium">
+                  {entry.player.name} ({entry.record})
+                </span>
                 <span className="text-sm text-muted-foreground">
                   {entry.totalMatches} match{entry.totalMatches !== 1 ? "es" : ""}
                 </span>

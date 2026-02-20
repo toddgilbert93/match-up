@@ -9,19 +9,22 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const ladder = await getLadder();
 
-  // Group players by record
+  // Group players by number of wins
   const grouped = ladder.reduce((acc, entry) => {
-    if (!acc[entry.record]) {
-      acc[entry.record] = [];
+    const key = entry.wins;
+    if (!acc[key]) {
+      acc[key] = [];
     }
-    acc[entry.record].push(entry);
+    acc[key].push(entry);
     return acc;
-  }, {} as Record<string, typeof ladder>);
+  }, {} as Record<number, typeof ladder>);
 
-  const groups = Object.entries(grouped).map(([record, entries]) => ({
-    record,
-    entries,
-  }));
+  const groups = Object.entries(grouped)
+    .map(([wins, entries]) => ({
+      wins: Number(wins),
+      entries,
+    }))
+    .sort((a, b) => b.wins - a.wins);
 
   return (
     <div className="space-y-6">
@@ -52,8 +55,8 @@ export default async function HomePage() {
         <div className="space-y-4">
           {groups.map((group) => (
             <LadderGroup
-              key={group.record}
-              record={group.record}
+              key={group.wins}
+              record={`${group.wins}`}
               entries={group.entries}
             />
           ))}
