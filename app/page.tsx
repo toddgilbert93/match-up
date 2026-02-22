@@ -31,9 +31,6 @@ export default async function HomePage() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Ladder Standings</h1>
         <div className="flex gap-2">
-          <Link href="/find-opponent">
-            <Button variant="outline">Find an opponent</Button>
-          </Link>
           <Link href="/matches/new">
             <Button variant="outline">Submit Match</Button>
           </Link>
@@ -45,8 +42,13 @@ export default async function HomePage() {
         <h2 className="text-lg font-semibold mb-2">Rules</h2>
         <p className="text-muted-foreground text-sm">
           Add yourself and submit your match scores. Try to play 
-          everyone before challenging someone to a rematch. Rankings are determined by number of wins not win percentage to encourage more matches. And remember, have fun
+          everyone before challenging someone to a rematch. Rankings are determined by number of wins not win percentage to encourage more matches. And remember, have fun!
         </p>
+        <Link href="/find-opponent" className="mt-3 inline-block">
+          <Button variant="link" className="h-auto p-0 text-muted-foreground">
+            Find an opponent
+          </Button>
+        </Link>
       </section>
 
       {ladder.length === 0 ? (

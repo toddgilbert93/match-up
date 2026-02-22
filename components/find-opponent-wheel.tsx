@@ -141,12 +141,12 @@ export function FindOpponentWheel({ entries }: Props) {
           </div>
         ) : eligibleEntries.length === 0 ? (
           <div className="rounded-lg border bg-muted/40 p-8 text-left text-muted-foreground w-full">
-            <p className="text-lg">You've played everyone on the ladder.</p>
+            <p className="text-lg">You&apos;ve played everyone on the ladder.</p>
             <p className="mt-1">Challenge someone to a rematch!</p>
           </div>
         ) : eligibleEntries.length === 1 ? (
           <div className="w-full rounded-lg border bg-muted/40 p-4 text-left">
-            <p className="text-sm text-muted-foreground">Only one opponent left you haven't played</p>
+            <p className="text-sm text-muted-foreground">Only one opponent left you haven&apos;t played</p>
             <p className="mt-1 text-2xl font-bold">{eligibleEntries[0].player.name}</p>
             <p className="mt-1 text-sm text-muted-foreground">
               {eligibleEntries[0].record}
