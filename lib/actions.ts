@@ -22,6 +22,22 @@ export async function getPlayers() {
   return await db.select().from(players).orderBy(players.name);
 }
 
+/** Returns player IDs that this player has already played against (at least one match). */
+export async function getOpponentIds(playerId: number): Promise<number[]> {
+  const matchesAsP1 = await db
+    .select({ id: matches.player2Id })
+    .from(matches)
+    .where(eq(matches.player1Id, playerId));
+  const matchesAsP2 = await db
+    .select({ id: matches.player1Id })
+    .from(matches)
+    .where(eq(matches.player2Id, playerId));
+  const ids = new Set<number>();
+  matchesAsP1.forEach((r) => ids.add(r.id));
+  matchesAsP2.forEach((r) => ids.add(r.id));
+  return Array.from(ids);
+}
+
 export async function deletePlayer(id: number) {
   try {
     const [player] = await db

@@ -22,7 +22,7 @@ export default async function HomePage() {
   const groups = Object.entries(grouped)
     .map(([wins, entries]) => ({
       wins: Number(wins),
-      entries,
+      entries: [...entries].sort((a, b) => a.totalMatches - b.totalMatches),
     }))
     .sort((a, b) => b.wins - a.wins);
 
@@ -31,6 +31,9 @@ export default async function HomePage() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Ladder Standings</h1>
         <div className="flex gap-2">
+          <Link href="/find-opponent">
+            <Button variant="outline">Find an opponent</Button>
+          </Link>
           <Link href="/matches/new">
             <Button variant="outline">Submit Match</Button>
           </Link>

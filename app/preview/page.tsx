@@ -39,7 +39,7 @@ export default function PreviewPage() {
   const groups = Object.entries(grouped)
     .map(([wins, entries]) => ({
       wins: Number(wins),
-      entries,
+      entries: [...entries].sort((a, b) => a.totalMatches - b.totalMatches),
     }))
     .sort((a, b) => b.wins - a.wins);
 
